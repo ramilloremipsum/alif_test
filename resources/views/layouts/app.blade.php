@@ -31,8 +31,8 @@
                                 class="fa fa-folder-o text-warning"></i> Папки<span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('documents.index')}}"><i
-                                class="fa fa-files-o text-primary"></i> Документы<span class="sr-only"></span></a>
+                        <a class="nav-link" href="{{route('file.index')}}"><i
+                                class="fa fa-files-o text-primary"></i> Файлы<span class="sr-only"></span></a>
                     </li>
                 </ul>
                 <form class="mx-2 my-auto d-inline w-50" action="/search" method="get">

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Documents;
 use App\Folders;
-use App\Http\Requests\StoreDocumentRequest;
+use App\Http\Requests\StoreFileRequest;
 
 class DocumentsController extends Controller
 {
@@ -43,7 +43,7 @@ class DocumentsController extends Controller
     }
 
 
-    public function update(StoreDocumentRequest $request, $id)
+    public function update(StoreFileRequest $request, $id)
     {
         $document = Documents::query()->findOrFail($id);
         if ($request->validated()) {
@@ -52,7 +52,7 @@ class DocumentsController extends Controller
         }
     }
 
-    public function store(StoreDocumentRequest $request)
+    public function store(StoreFileRequest $request)
     {
         if ($request->validated()) {
             try {

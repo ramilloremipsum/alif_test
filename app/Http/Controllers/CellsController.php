@@ -24,7 +24,7 @@ class CellsController extends Controller
 
     public function show($id)
     {
-        $cell = Cells::with('folders.documents')->findOrFail($id);
+        $cell = Cells::with('folders.files')->findOrFail($id);
         return view('cells.show', [
             'cell' => $cell
         ]);

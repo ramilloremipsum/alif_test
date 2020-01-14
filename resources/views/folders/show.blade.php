@@ -16,8 +16,8 @@
                     <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus"
                        class="text-dark d-inline-block"
                        title="Папка и документы"
-                       data-content="Вы находитесь в папке. В которой в свою очередь могут находиться документы. Здесь вы, впрочем, как почти везде, можете редактировать и удалять папку.
-                       Также, здесь вы можете сразу создать документ, относящийся к текущей папке.">
+                       data-content="Вы находитесь в папке. В которой в свою очередь могут находиться файлы. Здесь вы, впрочем, как почти везде, можете редактировать и удалять папку.
+                       Также, здесь вы можете сразу создать файл, относящийся к текущей папке.">
                         <i class="fa fa-info-circle"></i>
                     </a>
                 </small>
@@ -26,8 +26,8 @@
         <p class="text-muted">{{$folder->description}}</p>
     </div>
     <div class="mb-3 clearfix">
-        <a href="{{route('folders.create_document',$folder->id)}}" class="btn btn-success"><i class="fa fa-plus"></i>
-            <i class="fa fa-file-o"></i> Создать здесь документ
+        <a href="{{route('folders.create_file',$folder->id)}}" class="btn btn-success"><i class="fa fa-plus"></i>
+            <i class="fa fa-file-o"></i> Загрузить сюда файл
         </a>
         <form action="{{route('folders.destroy',$folder->id)}}" method="POST" class="d-inline-block float-right ml-md-1"
               onSubmit="return confirm('Вы уверены?')">
@@ -43,17 +43,17 @@
     </div>
     <p>
     </p>
-    @if(count($folder->documents))
+    @if(count($folder->files))
         <div class="row d-flex align-items-stretch">
-            @foreach($folder->documents as $document)
+            @foreach($folder->files as $file)
                 <div class="col-md-3">
                     @include('widgets.item',[
                     'cardType'=>'file',
-                    'cardTitle'=>$document->title,
-                    'cardDescription'=>$document->description,
-                    'cardShowRoute'=>route('documents.show',$document->id),
-                    'cardEditRoute'=>route('documents.edit',$document->id),
-                    'cardDestroyRoute'=>route('documents.destroy',$document->id),
+                    'cardTitle'=>$file->title,
+                    'cardDescription'=>$file->description,
+                    'cardShowRoute'=>route('file.show',$file->id),
+                    'cardEditRoute'=>route('file.edit',$file->id),
+                    'cardDestroyRoute'=>route('file.destroy',$file->id),
                     'destroyConfirm'=>[
                         'value'=> 'Вы хорошо подумали?'
                     ],
@@ -61,11 +61,11 @@
                 </div>
             @endforeach
         </div>
-        @else
+    @else
 
         <code>
-            Здесь пока нет ни одного документа. <a href="{{route('folders.create_document',$folder->id)}}">Создать</a>
-            или присвоить через <a href="{{route('documents.index')}}">Документы</a>
+            Здесь пока нет ни одного файла. <a href="{{route('folders.create_file',$folder->id)}}">Создать</a>
+            или присвоить через <a href="{{route('file.index')}}">Файлы</a>
         </code>
     @endif
 @endsection

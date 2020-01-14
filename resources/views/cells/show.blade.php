@@ -55,13 +55,13 @@
                         'cardEditRoute'=>route('folders.edit',$folder->id),
                         'cardDestroyRoute'=>route('folders.destroy',$folder->id),
                         'badge'=>[
-                            'colorCondition'=> count($folder->documents)==0,
-                            'value'=> count($folder->documents),
-                            'valuePrefix'=> 'Документов: ',
+                            'colorCondition'=> count($folder->files)==0,
+                            'value'=> count($folder->files),
+                            'valuePrefix'=> 'Файлов: ',
                         ],
                         'destroyConfirm'=>[
-                            'value'=> $folder->hasDocuments()
-                            ?'Удалив папку, все входящте в нее документы перестанут принадлежать какой-либо папке. Хотите продолжить удаление?'
+                            'value'=> $folder->hasFiles()
+                            ?'Удалив папку, все входящие в нее файлы перестанут принадлежать какой-либо папке. Хотите продолжить удаление?'
                             :'Вы уверены?',
                         ],
                     ])

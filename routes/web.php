@@ -51,14 +51,14 @@ Route::get('folders/{id}/show', 'FoldersController@show')->name('folders.show');
 Route::get('folders/{id}/edit', 'FoldersController@edit')->name('folders.edit');
 Route::post('folders/{id}/update', 'FoldersController@update')->name('folders.update');
 Route::post('folders/{id}/destroy', 'FoldersController@destroy')->name('folders.destroy');
-Route::get('folders/{id}/create_document', 'FoldersController@create_document')->name('folders.create_document');
+Route::get('folders/{id}/create_file', 'FoldersController@create_file')->name('folders.create_file');
 
 Route::get('folders/get_boxes/{id}', 'FoldersController@get_boxes')->name('folders.get_boxes');
 Route::get('folders/get_cells/{id}', 'FoldersController@get_cells')->name('folders.get_cells');
 Route::get('folders/get_workplaces', 'FoldersController@get_workplaces')->name('folders.get_workplaces');
 
 Route::post('folders/store', 'FoldersController@store')->name('folders.store');
-Route::post('folders/{id}/store_document', 'FoldersController@store_document')->name('folders.store_document');
+Route::post('folders/{id}/store_file', 'FoldersController@store_file')->name('folders.store_file');
 
 
 Route::get('documents', 'DocumentsController@index')->name('documents.index');
@@ -68,6 +68,14 @@ Route::get('documents/{id}/show', 'DocumentsController@show')->name('documents.s
 Route::get('documents/{id}/edit', 'DocumentsController@edit')->name('documents.edit');
 Route::post('documents/{id}/destroy', 'DocumentsController@destroy')->name('documents.destroy');
 Route::post('documents/{id}/update', 'DocumentsController@update')->name('documents.update');
+
+Route::get('file', 'FileController@index')->name('file.index');
+Route::get('file/create', 'FileController@create')->name('file.create');
+Route::post('file/store', 'FileController@store')->name('file.store');
+Route::get('file/{id}/show', 'FileController@show')->name('file.show');
+Route::get('file/{id}/edit', 'FileController@edit')->name('file.edit');
+Route::post('file/{id}/destroy', 'FileController@destroy')->name('file.destroy');
+Route::post('file/{id}/update', 'FileController@update')->name('file.update');
 
 
 

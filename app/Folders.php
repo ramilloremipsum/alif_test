@@ -2,7 +2,8 @@
 
 namespace App;
 
-use App\Http\Requests\CreateDocumentInFolderRequest;
+use App\Helpers\Amate;
+use App\Http\Requests\CreateFileInFolderRequest;
 use Illuminate\Database\Eloquent\Model;
 
 class Folders extends Model
@@ -11,7 +12,7 @@ class Folders extends Model
 
     protected $fillable = ['title', 'description', 'cell_id'];
 
-    public function createDocument(CreateDocumentInFolderRequest $request)
+    public function createDocument(CreateFileInFolderRequest $request)
     {
         $request->request->add([
             'folder_id' => $this->id
@@ -20,9 +21,9 @@ class Folders extends Model
         return $document;
     }
 
-    public function hasDocuments()
+    public function hasFiles()
     {
-        return count($this->documents) > 0;
+        return count($this->files) > 0;
     }
 
     public function cell()
@@ -30,9 +31,9 @@ class Folders extends Model
         return $this->belongsTo('App\Cells', 'cell_id', 'id');
     }
 
-    public function documents()
+    public function files()
     {
-        return $this->hasMany('App\Documents', 'folder_id', 'id');
+        return $this->hasMany('App\Files', 'folder_id', 'id');
     }
 
     public function getAddressStr()

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreDocumentRequest extends FormRequest
+class StoreFileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,11 @@ class StoreDocumentRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => [
+            'file' => [
+                'file',
                 'required',
-                'max:255',
-                Rule::unique('documents', 'title')->ignore($this->id)
+                'max:10000',
+                'mimes:pdf,jpg,jpeg,png'
             ],
             'folder_id' => [
                 'nullable',
@@ -41,8 +42,10 @@ class StoreDocumentRequest extends FormRequest
     {
         return [
             'folder_id.exists' => 'Хорошая попытка',
-            'title.required' => 'Нужно указать имя документа',
-            'title.unique' => 'Документ с таким именем существует',
+
+            'file.required' => 'Нужно указать файл',
+            'file.max' => 'Файл не должен быть ьолее 10000 байт',
+            'file.mimes' => 'Файл может быть только таких расширений: pdf, jpg',
         ];
     }
 }

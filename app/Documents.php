@@ -16,14 +16,4 @@ class Documents extends Model
         return $this->belongsTo('App\Folders', 'folder_id', 'id');
     }
 
-    public function getAddressStr()
-    {
-        if ($this->folder) {
-            return 'Место: "' . $this->folder->cell->box->workplace->title . '"" | ' .
-                'Шкаф: "' . $this->folder->cell->box->title . '" | ' .
-                'Ячейка: "' . $this->folder->cell->title . '" | ' .
-                'Папка: "' . $this->folder->title . '"';
-        }
-        return '';
-    }
 }

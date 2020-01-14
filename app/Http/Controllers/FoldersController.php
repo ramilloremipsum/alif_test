@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 
 use App\Boxes;
 use App\Cells;
+use App\Files;
 use App\Folders;
-use App\Http\Requests\CreateDocumentInFolderRequest;
+use App\Http\Requests\CreateFileInFolderRequest;
 use App\Http\Requests\StoreFolderRequest;
 use App\Workplaces;
 
@@ -14,7 +15,7 @@ class FoldersController extends Controller
 {
     public function index()
     {
-        $folders = Folders::with(['cell.box.workplace', 'documents'])->get();
+        $folders = Folders::with(['cell.box.workplace', 'files'])->get();
         return view('folders.index', [
             'folders' => $folders
         ]);
@@ -62,24 +63,27 @@ class FoldersController extends Controller
         }
     }
 
-    public function create_document($id)
+    public function create_file($id)
     {
         $folder = Folders::findOrFail($id);
-        return view('folders.create_document', [
+        return view('folders.create_file', [
             'folder' => $folder
         ]);
     }
 
-    public function store_document(CreateDocumentInFolderRequest $request, $id)
+    public function store_file(CreateFileInFolderRequest $request, $id)
     {
+        /** @var Folders $folder */
         $folder = Folders::findOrFail($id);
         if ($request->validated()) {
-            $document = $folder->createDocument($request);
+            $request->request->add([
+                'folder_id' => $id
+            ]);
+            $file = Files::createFile($request);
             return redirect()->route('folders.show', ['id' => $folder->id])
-                ->with('success',
-                    'Документ "' . $document->title . '" успешно создан в папке "' . $folder->title . '"');
+                ->with('success', 'Файл "' . $file->title . '" успешно создан в папке "' . $folder->title . '"');
         }
-        return view('folders.create_document', [
+        return view('folders.create_file', [
             'folder' => $folder
         ]);
     }

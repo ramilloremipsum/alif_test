@@ -38,7 +38,7 @@ class BoxesController extends Controller
         $box = Boxes::findOrFail($id);
         return view('boxes.edit', [
             'box' => $box
-        ]);s
+        ]);
     }
 
     public function destroy($id)

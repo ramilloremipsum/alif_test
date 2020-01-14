@@ -32,7 +32,7 @@
             <th>id</th>
             <th>Название</th>
             <th>Описание</th>
-            <th>Кол-во документов</th>
+            <th>Кол-во файлов</th>
             <th>Адрес</th>
             <th>Действия</th>
         </tr>
@@ -47,7 +47,7 @@
                             </a>
                         </td>
                         <td>{{$folder->description}}</td>
-                        <td>{{count($folder->documents)}}</td>
+                        <td>{{count($folder->files)}}</td>
                         <td>
                             <a href="{{route('cells.show',$folder->cell->id)}}">
                                 {{$folder->getAddressStr()}}
