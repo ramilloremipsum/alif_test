@@ -3,23 +3,23 @@
 
     @php
         $breadcrumbs = [['url'=>route('workplaces.index'),'label'=>'Рабочие места']];
-            if(!empty($document->folder)){
+            if(!empty($file->folder)){
                 $breadcrumbs = array_merge($breadcrumbs,[
-                    ['url'=>route('workplaces.show',$document->folder->cell->box->workplace->id),'label'=> 'Место: "'.$document->folder->cell->box->workplace->title.'"'],
-                    ['url'=>route('boxes.show',$document->folder->cell->box->id),'label'=> 'Шкаф: "'.$document->folder->cell->box->title.'"'],
-                    ['url'=>route('cells.show',$document->folder->cell->id),'label'=> 'Ячейка: "'.$document->folder->cell->title.'"'],
-                    ['url'=>route('folders.show',$document->folder->id),'label'=> 'Папка: "'.$document->folder->title.'"'],
-                    ['url'=>route('documents.show',$document->id),'label'=> 'Документ: "'.$document->title.'"'],
+                    ['url'=>route('workplaces.show',$file->folder->cell->box->workplace->id),'label'=> 'Место: "'.$file->folder->cell->box->workplace->title.'"'],
+                    ['url'=>route('boxes.show',$file->folder->cell->box->id),'label'=> 'Шкаф: "'.$file->folder->cell->box->title.'"'],
+                    ['url'=>route('cells.show',$file->folder->cell->id),'label'=> 'Ячейка: "'.$file->folder->cell->title.'"'],
+                    ['url'=>route('folders.show',$file->folder->id),'label'=> 'Папка: "'.$file->folder->title.'"'],
+                    ['url'=>route('file.show',$file->id),'label'=> 'Документ: "'.$file->title.'"'],
                 ]);
             };
-        $breadcrumbs[] = ['label'=> 'Редактирование документа: "'.$document->title.'"'];
+        $breadcrumbs[] = ['label'=> 'Редактирование документа: "'.$file->title.'"'];
     @endphp
     @include('widgets.breadcrumbs',[
         'breadcrumbs'=>$breadcrumbs
     ])
     <div class="page-header">
         <h1 class="display-4">
-            Редактирование документа: {{$document->title}}
+            Редактирование файла: {{$file->title}}
             <sup>
                 <small>
                     <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus"
@@ -34,18 +34,9 @@
         </h1>
     </div>
     @include('widgets.errors')
-    <form action="{{route('documents.update',$document->id)}}" method="POST">
+    <form action="{{route('file.update',$file->id)}}" method="POST">
         @csrf
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="title">Уникальное имя документа:</label>
-                    <input id="title" type="text" value="{{$document->title}}" name="title" class="form-control">
-                    @error('title')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="title">Папка:</label>
@@ -53,20 +44,11 @@
                         <option value="">--- Выбрать папку ---</option>
                         @foreach ($folders as $folder_id => $title)
                             <option
-                                value="{{ $folder_id }}" {{($folder_id == $document->folder_id) ? 'selected' : '' }}>
+                                value="{{ $folder_id }}" {{($folder_id == $file->folder_id) ? 'selected' : '' }}>
                                 {{ $title }}
                             </option>
                         @endforeach
                     </select>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="data" class="control-label">Содержимое</label>
-                    <textarea id="data"
-                              class="form-control"
-                              name="data"
-                              rows="15">{{$document->data}}</textarea>
                 </div>
             </div>
         </div>

@@ -6,6 +6,7 @@ use App\Files;
 use App\Folders;
 use App\Helpers\Amate;
 use App\Http\Requests\StoreFileRequest;
+use App\Http\Requests\UpdateFileRequest;
 
 class FileController extends Controller
 {
@@ -44,11 +45,11 @@ class FileController extends Controller
     }
 
 
-    public function update(StoreFileRequest $request, $id)
+    public function update(UpdateFileRequest $request, $id)
     {
-        $document = Files::query()->findOrFail($id);
+        $file = Files::query()->findOrFail($id);
         if ($request->validated()) {
-            $document->update($request->all());
+            $file->update($request->all());
             return redirect(route('file.index'))->with('success', 'Файл успешно обновлен');
         }
     }

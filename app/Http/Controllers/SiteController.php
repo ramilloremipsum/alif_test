@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Documents;
+use App\Files;
 use App\Folders;
 use App\Workplaces;
 use Illuminate\Http\Request;
@@ -24,13 +25,13 @@ class SiteController extends Controller
         $resultFolders = false;
         $q = $request->get('q');
         if (!empty($q)) {
-            $resultDocuments = Documents::query()
+            $resultDocuments = Files::query()
                 ->select(DB::raw(
-                'documents.*,
-                    IF(`documents`.`title` like  \'' . $q . '\', 100, 0)
-                    + IF(`documents`.`title` like  \'' . $q . '%\', 90, 0)
-                    + IF(`documents`.`title` like  \'% ' . $q . '%\', 80, 0)
-                    + IF(`documents`.`title` like  \'%' . $q . '\', 70, 0)
+                'files.*,
+                    IF(`files`.`title` like  \'' . $q . '\', 100, 0)
+                    + IF(`files`.`title` like  \'' . $q . '%\', 90, 0)
+                    + IF(`files`.`title` like  \'% ' . $q . '%\', 80, 0)
+                    + IF(`files`.`title` like  \'%' . $q . '\', 70, 0)
                      AS `relevance`'
             ))
                 ->where('title', 'like', '%' . $q . '%')

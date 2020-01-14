@@ -9,10 +9,10 @@
     <div class="page-header">
         <h1 class="display-4"><i class="fa fa-search text-info"></i> Поиск</h1>
     </div>
-    <h3>Документы</h3>
+    <h3>Файлы</h3>
     <ul>
         @if(!count($resultDocuments))
-            <code>По запросу "{{$q}}" документов не найдено.</code>
+            <code>По запросу "{{$q}}" файлов не найдено.</code>
         @else
             @foreach($resultDocuments as $resultDocument)
                 <li>

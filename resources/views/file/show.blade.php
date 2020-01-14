@@ -45,6 +45,9 @@
                 Удалить
             </button>
         </form>
+        <a href="{{route('file.edit',$file->id)}}" class="btn btn-primary float-right">
+            <i class="fa fa-edit"></i> Редактировать
+        </a>
     </div>
     <div class="card">
         <div class="card-body">

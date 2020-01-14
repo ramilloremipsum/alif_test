@@ -54,6 +54,8 @@
                     <td>
                         <a href="{{route('file.show',$file->id)}}" class="btn btn-outline-success btn-sm"><i
                                 class="fa fa-dot-circle-o"></i></a>
+                        <a href="{{route('file.edit',$file->id)}}" class="btn btn-outline-primary btn-sm"><i
+                                class="fa fa-edit"></i></a>
                         <form action="{{route('file.destroy',$file->id)}}"
                               onSubmit="return confirm('Вы уверены?')"
                               method="POST"
